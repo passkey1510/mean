@@ -1,0 +1,21 @@
+{
+	"css": {
+        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css": "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css",
+		"public/build/css/dist.min.css": [
+			"public/**/assets/css/*.css"
+		]
+	},
+	"js": {
+        "//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js": "//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js",
+		"public/build/js/dist.min.js": [
+			"public/system/lib/angular-cookies/angular-cookies.js",
+			"public/system/lib/angular-resource/angular-resource.js",
+			"public/system/lib/angular-ui-router/release/angular-ui-router.js",
+			"public/system/lib/angular-bootstrap/ui-bootstrap.js",
+			"public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js",
+			"public/init.js",
+			"public/*/*.js",
+			"public/*/*/*.js"
+		]
+	}
+}

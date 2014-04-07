@@ -63,17 +63,11 @@ module.exports = function(app, passport, db) {
         app.use(express.methodOverride());
 
         // Import your asset file
-        var assets = require('./assets.json');
-        assetmanager.init({
-            js: assets.js,
-            css: assets.css,
-            debug: (process.env.NODE_ENV !== 'production'),
-            webroot: 'public/public'
-        });
+        var assets = require('./assets');
         // Add assets to local variables
         app.use(function(req, res, next) {
             res.locals({
-                assets: assetmanager.assets
+                assets: assets.getAssets()
             });
             next();
         });

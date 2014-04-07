@@ -1,10 +1,16 @@
 'use strict';
 
+var assets = require('./server/config/assets');
+
 module.exports = function(grunt) {
     // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('server/config/assets.json'),
+        clean: {
+            production: {
+                src: ['public/build']
+            }
+        },
         watch: {
             js: {
                 files: ['gruntfile.js', 'server.js', 'server/**/*.js', 'public/js/**', 'test/**/*.js'],
@@ -40,7 +46,7 @@ module.exports = function(grunt) {
                 mangle: false
             },
             production: {
-                files: '<%= assets.js %>'
+                files: assets.getAssets(true).js
             }
         },
         csslint: {
@@ -53,7 +59,7 @@ module.exports = function(grunt) {
         },
         cssmin: {
             combine: {
-                files: '<%= assets.css %>'
+                files: assets.getAssets(true).css
             }
         },
         nodemon: {
@@ -98,6 +104,7 @@ module.exports = function(grunt) {
     });
 
     //Load NPM tasks
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -114,7 +121,7 @@ module.exports = function(grunt) {
 
     //Default task(s).
     if (process.env.NODE_ENV === 'production') {
-        grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
+        grunt.registerTask('default', ['clean', 'jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
     } else {
         grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
     }
